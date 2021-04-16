@@ -14,10 +14,10 @@
 		@include vendor('align-items', 'center');
 		@include vendor('justify-content', 'center');
 		background-attachment: fixed;
-		background-image: url('../../images/pic01.jpg');
+		background-image: url('../../images/background.jpg');
 		background-position: bottom left;
 		background-size: cover;
-		border-top: solid 10px _palette(accent1, bg);
+		// border-top: solid 0px _palette(accent1, bg);
 		min-height: 75vh;
 		position: relative;
 		text-align: center;

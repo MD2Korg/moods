@@ -3,79 +3,67 @@
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 */
-
 /* Features */
-
-	.features > article {
-		float: left;
-		width: 48%;
-	}
-
-	.features:after {
-		content: '';
-		display: block;
-		clear: both;
-	}
+.features > article {
+  float: left;
+  width: 48%;
+}
+.features:after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
 /* Stats */
-
-	.stats > article {
-		float: left;
-		width: 24%;
-	}
-
-	.stats:after {
-		content: '';
-		display: block;
-		clear: both;
-	}
+.stats > article {
+  float: left;
+  width: 24%;
+}
+.stats:after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
 /* Split */
-
-	.split > * {
-		float: left;
-		width: 42% !important;
-	}
-
-	.split:after {
-		content: '';
-		display: block;
-		clear: both;
-	}
+.split > * {
+  float: left;
+  width: 42% !important;
+}
+.split:after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
 /* Quotes */
-
-	.quotes > article {
-		float: left;
-	}
-
-	.quotes:after {
-		content: '';
-		display: block;
-		clear: both;
-	}
+.quotes > article {
+  float: left;
+}
+.quotes:after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
 /* Header */
-
-	#header > .logo {
-		float: left;
-	}
-
-	#header > nav {
-		float: right;
-		margin-top: 0.625em;
-	}
-
-		#header > nav > ul > li {
-			display: inline-block;
-		}
-
-	#header.alt > nav {
-		margin-top: 0;
-	}
+#header > .logo {
+  float: left;
+}
+#header > nav {
+  float: right;
+  margin-top: 0.625em;
+}
+#header > nav > ul > li {
+  display: inline-block;
+}
+#header.alt > nav {
+  margin-top: 0;
+}
 
 /* Banner */
+#banner > .inner {
+  margin: 0 auto;
+}
 
-	#banner > .inner {
-		margin: 0 auto;
-	}
+/*# sourceMappingURL=ie9.css.map */
