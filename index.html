@@ -42,6 +42,37 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<script src="assets/js/jquery.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$.getJSON("https://odin.md2k.org/mcontain_api/status", function(data) {
+					var current_data=data[0];
+
+					var last_update = new Date(Date.parse(current_data['timestamp']) + 86400000); //Add one day because this timestamp reflect the beginning of the day of data
+					$('#last_update_date').text(last_update.toString());
+
+					$('#app_users').text(current_data['app_users']);
+					$('#social_encounters_per_user').text(Math.round(current_data['social_encounters_per_user']*100)/100);
+					$('#total_infected_encounters').text(current_data['total_infected_encounters']);
+					$('#max_concurrent_encounters').text(current_data['max_concurrent_encounters']);
+
+				        if (data.length == 2) {
+					    var historical_data=data[1];
+					    var app_users_change = Math.round((current_data['app_users']-historical_data['app_users'])/historical_data['app_users']*1000)/10;
+					    var social_encounters_per_user_change = Math.round((current_data['social_encounters_per_user']-historical_data['social_encounters_per_user'])/historical_data['social_encounters_per_user']*1000)/10;
+					    var total_infected_encounters_change = Math.round((current_data['total_infected_encounters']-historical_data['total_infected_encounters'])/historical_data['total_infected_encounters']*1000)/10;
+					    var max_concurrent_encounters_change = Math.round((current_data['max_concurrent_encounters']-historical_data['max_concurrent_encounters'])/historical_data['max_concurrent_encounters']*1000)/10;
+
+
+					    $('#app_users_change').text('(' + app_users_change + '% daily change)');
+					    $('#social_encounters_per_user_change').text('(' + social_encounters_per_user_change + '% daily change)');
+					    // $('#total_infected_encounters_change').text('(' + total_infected_encounters_change + '% daily change)');
+					    $('#max_concurrent_encounters_change').text('(' + max_concurrent_encounters_change + '% daily change)');
+					}
+
+				})
+			});
+		</script>
 	</head>
 	<body id="top">
 
@@ -116,27 +147,25 @@
 			<section id="two" class="wrapper style1 special">
 				<a id="Data"></a>
 				<div class="inner">
-					<h4>Something to go here</h4>
-				<!-- <h4>Last daily update on <span id="last_update_date"> Sat Aug 08 2020 00:00:00 GMT-0500 (Central Daylight Time)</span></h4>
-					<div class="stats">
-						<article>
-							<h3><span id="app_users">107</span> App Users</h3>
-							<h4><div id="app_users_change">(-6.1% daily change)</div></h4>
+					<h4>Live data to go here</h4>
+					<h4>Last daily update on <span id="last_update_date"> Sat Aug 08 2020 00:00:00 GMT-0500 (Central Daylight Time)</span></h4>
+						<div class="stats">
+							<article>
+								<h3><span id="app_users">107</span> App Users</h3>
+								<h4><div id="app_users_change">(-6.1% daily change)</div></h4>
 
-						</article>
-						<article>
-							<h3><span id="social_encounters_per_user">0.02</span> Proximity Encounters Per User</h3>
-							<h4><div id="social_encounters_per_user_change">(6.5% daily change)</div></h4>
+							</article>
+							<article>
+								<h3><span id="social_encounters_per_user">0.02</span> Proximity Encounters Per User</h3>
+								<h4><div id="social_encounters_per_user_change">(6.5% daily change)</div></h4>
 
-						</article>
+							</article>
+							<article>
+								<h3><span id="max_concurrent_encounters">1</span> User Encounters at the Largest Crowding Event</h3>
+								<h4><div id="max_concurrent_encounters_change">(0% daily change)</div></h4>
 
-
-						<article>
-							<h3><span id="max_concurrent_encounters">1</span> User Encounters at the Largest Crowding Event</h3>
-							<h4><div id="max_concurrent_encounters_change">(0% daily change)</div></h4>
-
-						</article>
-					</div> -->
+							</article>
+						</div>
 				</div>
 			</section>
 
@@ -157,18 +186,21 @@
 						<section>
 							<div class="inner style1">
 								<h2>Participate in the MOODS study</h2>
-								<p>Are you interested in citizen science, quantified self, and self-monitoring via mobile, wearable sensor technologies? In order to be eligible to participate, you will need to:</p>
+								<p>Are you interested in tracking your daily stress and stressors via the MOODS smartwatch app? To be eligible to participate, you will need to:</p>
 								<ul>
 									<li>Be a generally healthy adult between 18-64 years old</li>
-									<li>Be willing to wear provided wrist sensor during waking hours for 100-day study period</li>
+									<li>Be willing to wear study-provided Fossil smartwatch during waking hours for 100-day study period</li>
 									<li>Be willing to label system-detected periods of stress every day for 100-day study period</li>
 									<li>Be willing to answer short weekly surveys during 100-day study period</li>
 									<li>Have smartphone compatible with the data collection application</li>
-									<li>Have adequate data connection (cellular data connection or Wi-Fi)</li>
+									<li>Have adequate data connection (cellular data connection (minimal) or Wi-Fi (50MB/day))</li>
 									<li>Be able to provide your own informed consent and read/understand English language</li>
 									<li>Reside in the United States and intend to maintain residence in the United States for 100-day study period</li>
 								</ul>
 								<p>Please review our <a href="pdfs/MOODS_consent_20200221.pdf">consent form</a> before participating in the MOODS study.</p>
+								<p>This study is limited to 100 participants, organized in groups, enrolled bi-weekly.  Once you have submitted your interest to participate, you will be kept in the selection pool until you are selected or 100 participants have already completed the 100-day study.</p>
+								<p>If interested, please fill out the screening survey (LINK HERE).  If selected, you will receive an email invitation, describing the next steps to complete your enrollment in the MOODS study.</p>
+
 							</div>
 						</section>
 				</div>
@@ -190,13 +222,13 @@
 									<p>Any adult (18+) residing in the United States who meets the eligibility criteria for the study (<a href="#criteria">criteria</a>) can apply to participate in the MOODS study.</p>
 
 									<h4>How long is the MOODS study for?</h4>
-									<p>Each participant is to participate in the study for 100 consecutive days actively using the MOODS app and the study-provided smartwatch. Participants will receive weekly visualization of their data showing patterns of their daily stressors.</p>
+									<p>Each participant is to participate in the study for 100 days actively using the MOODS app and the study-provided smartwatch. Participants will receive weekly visualization of their data showing patterns of their daily stressors.</p>
 
 
 								</div>
 								<div class="content">
 									<h4>What is the MD2K Center of Excellence?</h4>
-									<p>The Center of Excellence for Mobile Sensor Data-to-Knowledge (MD2K), headquartered at University of Memphis, is a consortium of 13 universities funded by National Institutes of Health (NIH) in 2014 to develop novel computing technologies to use mobile sensor data for improving health and wellness.</p>
+									<p>The Center of Excellence for Mobile Sensor Data-to-Knowledge (MD2K), headquartered at University of Memphis, was established via a grant (#U54EB020404) from the National Institutes of Health (NIH) in 2014 to develop novel computing technologies to use mobile sensor data for improving health and wellness.</p>
 
 									<h4>Can I continue in the MOODS study beyond the required 100 days?</h4>
 									<p>Yes, while the study is still ongoing. Once the study concludes, you will be notified that the services and app will be shut down and you should uninstall them from both the watch and the phone.</p>
@@ -208,7 +240,7 @@
 							</div>
 						</li>
 						<li>
-							<h3>MOODS App</h3>
+							<h3>Phone App</h3>
 							<div class="split">
 								<div class="content">
 									<h4>How do I install the app?</h4>
@@ -227,10 +259,10 @@
 									<p>If you are already wearing a smartwatch, you can either choose to wear both watches on the same wrist or on different wrists. No interference is expected.</p>
 
 									<h4>Can I use my own smartwatch for the MOODS study?</h4>
-									<p>No, we support only the smartwatch shipped by us.</p>
+									<p>No, at this time the MOODS app can only be installed on the study provided smartwatch.</p>
 
 									<h4>How does the MOODS app affect the smartphone battery life?</h4>
-									<p>The MOODS app only communicates over Bluetooth with the smartwatch when a stress/non-stress episode has been detected. This episode is then transferred to our servers. Our app should have a minimal impact on your smartphone’s battery life.</p>
+									<p>The MOODS app only communicates over Bluetooth with the smartwatch when a stress/non-stress episode has been detected. Episodes are then transferred to our servers. Our app should have a minimal impact on your smartphone’s battery life.</p>
 
 									<h4>Can I install or use other apps on the smartwatch?</h4>
 									<p>Installing or heavily using other apps is likely to further reduce the smartwatch’s battery life. Therefore, it is recommended to minimize the usage of a smartwatch for other purposes for the 100-day study duration.</p>
@@ -241,8 +273,8 @@
 									<h4>Should I wear the smartwatch in my dominant or non-dominant hand?</h4>
 									<p>You can choose either wrist on which to wear the watch.</p>
 
-									<h4>How long should I wear the watch in a day?</h4>
-									<p>For the purposes of this study, we expect you to wear it at the start of the day for as long as the battery lasts. We expect the smartwatch to last approximately 8 hours on a full charge. You can always charge it again and wear it for the rest of the day. Please keep the battery on charge before you go to sleep so that the watch is fully charged for the next morning and collected data is uploaded.</p>
+									<h4>How long should I wear the watch daily?</h4>
+									<p>Stress episodes can be detected only when the smartwatch is worn and fully functional. We expect the smartwatch to last approximately 8 hours on a full charge. You can always charge it again and wear it for the rest of the day. Please keep the watch on the charger while you sleep so that it is fully charged for the next morning and collected data can be uploaded.</p>
 
 									<h4>Can I change the time of the notifications?</h4>
 									<p>Yes, you can go to “Settings -> Change daily notification time” in order to set up your preferred notification time. We suggest you set the evening time so you will have time to review the weekly visualizations.</p>
@@ -266,36 +298,7 @@
 							</div>
 						</li>
 						<li>
-							<h3>Privacy</h3>
-							<div class="split">
-								<div class="content">
-									<h4>Does the MOODS app collect and/or share personally identifying information?</h4>
-									<p>We need your identifiable contact information such as name, address, and email address in order to ship the smartwatch and to send the weekly study emails. We may also correspond with you, and you may ask us questions, via email to ensure the study data collection is running smoothly. These identifying informations are not shared with anyone outside the study team and also not released with study data for research purposes.</p>
-									<p>We collect your GPS (location) when stress episodes are detected by the smartwatch. We will use this information for research, and will only share this information with authorized researchers who will only use the 	information for approved research purposes and who will not further share these informations.</p>
-									<p>We collect non-personally identifiable information from the smartwatch and study platforms like motion sensors (accelerometer, gyroscope), heart rate information from the smartwatch LED sensors and stress episodes calculated from the smartwatch. After the study, we will share all of this de-identified data publicly to allow for widespread research work.</p>
-									<p>More detailed information is located in this study’s informed consent document.</p>
-
-
-
-								</div>
-								<div class="content">
-									<h4>What data does the app automatically collect?</h4>
-									<p>The MOODS app automatically collects accelerometer, gyroscope, LED and GPS data from the smartwatch. This information is then used to compute inferences of whether you are stressed, your activity (e.g., whether you are moving, driving, or still), and other inferences as described in the informed consent document.</p>
-
-									<h4>Can I pause or turn off data collection?</h4>
-									<p>Yes. You can turn on the privacy mode in the MOODS app screen via the smartwatch to stop data collection.</p>
-
-									<h4>Who will have access to the collected data?</h4>
-									<p>Authorized researchers working with the study team will have access to the data. We also plan to publicly release de-identified dataset to the research community, i.e., the released dataset will not contain any identifying information such as your personal information or raw GPS.</p>
-
-									<h4>What purposes will the data be used for?</h4>
-									<p>We will only use your contact information for the purposes of contacting you about this research study, and future research studies if you choose. We will use your research data for scientific progress and for the publication of study results. Please refer to the consent document for more information about data usage and sharing. </p>
-
-								</div>
-							</div>
-						</li>
-						<li>
-							<h3>WearOS</h3>
+							<h3>Watch App</h3>
 							<div class="split">
 								<div class="content">
 									<h4>Is it mandatory to download WearOS to use the MOODS app on the smartwatch?</h4>
@@ -303,8 +306,6 @@
 
 									<h4>Do I need a Google account to download and use the WearOS app?</h4>
 									<p>Yes. iOS users can download the WearOS app on the phone. A Google account is required to download the necessary application to the watch.</p>
-
-
 
 								</div>
 								<div class="content">
@@ -319,8 +320,8 @@
 							<h3>Stress</h3>
 							<div class="split">
 								<div class="content">
-									<h4>What is stress and how is it calculated from the collected data?</h4>
-									<p>Stress is a dynamic process that reflects the brain’s response to internal and external factors, characteristics of a person and their circumstances, and interactions between people. We use algorithms (computer code) to automatically analyze your heart rate via the LED sensor on the smartwatch. By using statistics computed from your heart rate data, we can infer whether a stress episode has taken place or not.</p>
+									<h4>What is stress and how is it calculated?</h4>
+									<p>Stress is a dynamic process that reflects the brain’s response to internal and external factors, characteristics of a person and their circumstances, and interactions between people. The MOODS app uses algorithms to automatically analyze your heart rate via the LED sensor on the smartwatch. By applying a trained machine learning model, the MOODS app infers whether a physiological arousal in indicitive of stress.</p>
 
 								</div>
 								<div class="content">
@@ -329,6 +330,33 @@
 
 									<h4>What is stress probability?</h4>
 									<p>According to your sensor data, stress probability is the model’s guess with respect to how likely you are to be stressed.</p>
+
+								</div>
+							</div>
+						</li>
+						<li>
+							<h3>Privacy</h3>
+							<div class="split">
+								<div class="content">
+									<h4>Does the MOODS app collect and/or share personally identifying information?</h4>
+									<p>We need your identifiable contact information such as name, address, and email address in order to ship the smartwatch and to send the weekly study emails. We may also correspond with you, and you may ask us questions, via email to ensure the study data collection is running smoothly. These identifying informations are not shared with anyone outside the study team and also not released with study data for research purposes.</p>
+									<p>We collect your GPS location when stress episodes are detected by the smartwatch. This is used to visualize and analyze the impact of location on stress and stressors. We will only share de-identified semantic locations with other researchers.</p>
+									<p>We also collect some non-personally identifiable information from the smartwatch and study platforms like motion sensors (accelerometer, gyroscope), heart rate information from the smartwatch LED sensors and stress episodes calculated from the smartwatch. After the study, we plan to share portions of de-identified data publicly to accelerate research by the community.</p>
+									<p>More detailed information is located in this study’s informed consent document.</p>
+
+								</div>
+								<div class="content">
+									<h4>What data does the app automatically collect?</h4>
+									<p>The MOODS app automatically collects accelerometer, gyroscope, LED and GPS data from the smartwatch. This information is then used to compute inferences of whether you are stressed, your activity (e.g., whether you are moving, driving, or still), and other inferences as described in the informed consent document.</p>
+
+									<h4>Can I pause or turn off data collection?</h4>
+									<p>Yes. You can turn on the privacy mode in the MOODS app screen via the smartwatch to stop data collection.</p>
+
+									<h4>Who will have access to the collected data?</h4>
+									<p>Authorized researchers working with the study team will have access to the data. We also plan to publicly release de-identified dataset to the research community, i.e., the released dataset will not contain any identifying information such as your personal information or raw GPS.</p>
+
+									<h4>What purposes will the data be used for?</h4>
+									<p>We will only use your contact information for the purposes of contacting you about this research study, and future research studies if you choose. We will use your research data for scientific progress and for the publication of study results. Please refer to the consent document for more information about data usage and sharing. </p>
 
 								</div>
 							</div>
