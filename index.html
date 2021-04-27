@@ -45,30 +45,30 @@
 		<script src="assets/js/jquery.min.js"></script>
 		<script>
 			$(document).ready(function () {
-				$.getJSON("https://odin.md2k.org/mcontain_api/status", function(data) {
+				$.getJSON("https://odin.md2k.org/app_api/stats", function(data) {
 					var current_data=data[0];
 
-					var last_update = new Date(Date.parse(current_data['timestamp']) + 86400000); //Add one day because this timestamp reflect the beginning of the day of data
-					$('#last_update_date').text(last_update.toString());
+					// var last_update = new Date(Date.parse(current_data['timestamp']) + 86400000); //Add one day because this timestamp reflect the beginning of the day of data
+					// $('#last_update_date').text(last_update.toString());
 
-					$('#app_users').text(current_data['app_users']);
-					$('#social_encounters_per_user').text(Math.round(current_data['social_encounters_per_user']*100)/100);
-					$('#total_infected_encounters').text(current_data['total_infected_encounters']);
-					$('#max_concurrent_encounters').text(current_data['max_concurrent_encounters']);
+					$('#app_users').text(current_data['users']);
+					// $('#social_encounters_per_user').text(Math.round(current_data['social_encounters_per_user']*100)/100);
+					// $('#total_infected_encounters').text(current_data['total_infected_encounters']);
+					// $('#max_concurrent_encounters').text(current_data['max_concurrent_encounters']);
+					//
+				  //       if (data.length == 2) {
+					//     var historical_data=data[1];
+					//     var app_users_change = Math.round((current_data['app_users']-historical_data['app_users'])/historical_data['app_users']*1000)/10;
+					//     var social_encounters_per_user_change = Math.round((current_data['social_encounters_per_user']-historical_data['social_encounters_per_user'])/historical_data['social_encounters_per_user']*1000)/10;
+					//     var total_infected_encounters_change = Math.round((current_data['total_infected_encounters']-historical_data['total_infected_encounters'])/historical_data['total_infected_encounters']*1000)/10;
+					//     var max_concurrent_encounters_change = Math.round((current_data['max_concurrent_encounters']-historical_data['max_concurrent_encounters'])/historical_data['max_concurrent_encounters']*1000)/10;
 
-				        if (data.length == 2) {
-					    var historical_data=data[1];
-					    var app_users_change = Math.round((current_data['app_users']-historical_data['app_users'])/historical_data['app_users']*1000)/10;
-					    var social_encounters_per_user_change = Math.round((current_data['social_encounters_per_user']-historical_data['social_encounters_per_user'])/historical_data['social_encounters_per_user']*1000)/10;
-					    var total_infected_encounters_change = Math.round((current_data['total_infected_encounters']-historical_data['total_infected_encounters'])/historical_data['total_infected_encounters']*1000)/10;
-					    var max_concurrent_encounters_change = Math.round((current_data['max_concurrent_encounters']-historical_data['max_concurrent_encounters'])/historical_data['max_concurrent_encounters']*1000)/10;
 
-
-					    $('#app_users_change').text('(' + app_users_change + '% daily change)');
-					    $('#social_encounters_per_user_change').text('(' + social_encounters_per_user_change + '% daily change)');
-					    // $('#total_infected_encounters_change').text('(' + total_infected_encounters_change + '% daily change)');
-					    $('#max_concurrent_encounters_change').text('(' + max_concurrent_encounters_change + '% daily change)');
-					}
+					    // $('#app_users_change').text('(' + app_users_change + '% daily change)');
+					    // $('#social_encounters_per_user_change').text('(' + social_encounters_per_user_change + '% daily change)');
+					    // // $('#total_infected_encounters_change').text('(' + total_infected_encounters_change + '% daily change)');
+					    // $('#max_concurrent_encounters_change').text('(' + max_concurrent_encounters_change + '% daily change)');
+					// }
 
 				})
 			});
@@ -147,11 +147,11 @@
 			<section id="two" class="wrapper style1 special">
 				<a id="Data"></a>
 				<div class="inner">
-					<h4>Live data to go here</h4>
-					<h4>Last daily update on <span id="last_update_date"> Sat Aug 08 2020 00:00:00 GMT-0500 (Central Daylight Time)</span></h4>
+					<h4>Current Study Statistics</h4>
+					<!-- <h4>Last daily update on <span id="last_update_date"> Sat Aug 08 2020 00:00:00 GMT-0500 (Central Daylight Time)</span></h4> -->
 						<div class="stats">
 							<article>
-								<h3><span id="app_users">107</span> App Users</h3>
+								<h3><span id="app_users"></span> Users</h3>
 								<h4><div id="app_users_change">(-6.1% daily change)</div></h4>
 
 							</article>
