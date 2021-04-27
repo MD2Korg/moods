@@ -46,29 +46,12 @@
 		<script>
 			$(document).ready(function () {
 				$.getJSON("https://odin.md2k.org/app_api/stats", function(data) {
-					var current_data=data[0];
-
-					// var last_update = new Date(Date.parse(current_data['timestamp']) + 86400000); //Add one day because this timestamp reflect the beginning of the day of data
-					// $('#last_update_date').text(last_update.toString());
+					var current_data=data;
 
 					$('#app_users').text(current_data['users']);
-					// $('#social_encounters_per_user').text(Math.round(current_data['social_encounters_per_user']*100)/100);
-					// $('#total_infected_encounters').text(current_data['total_infected_encounters']);
-					// $('#max_concurrent_encounters').text(current_data['max_concurrent_encounters']);
-					//
-				  //       if (data.length == 2) {
-					//     var historical_data=data[1];
-					//     var app_users_change = Math.round((current_data['app_users']-historical_data['app_users'])/historical_data['app_users']*1000)/10;
-					//     var social_encounters_per_user_change = Math.round((current_data['social_encounters_per_user']-historical_data['social_encounters_per_user'])/historical_data['social_encounters_per_user']*1000)/10;
-					//     var total_infected_encounters_change = Math.round((current_data['total_infected_encounters']-historical_data['total_infected_encounters'])/historical_data['total_infected_encounters']*1000)/10;
-					//     var max_concurrent_encounters_change = Math.round((current_data['max_concurrent_encounters']-historical_data['max_concurrent_encounters'])/historical_data['max_concurrent_encounters']*1000)/10;
-
-
-					    // $('#app_users_change').text('(' + app_users_change + '% daily change)');
-					    // $('#social_encounters_per_user_change').text('(' + social_encounters_per_user_change + '% daily change)');
-					    // // $('#total_infected_encounters_change').text('(' + total_infected_encounters_change + '% daily change)');
-					    // $('#max_concurrent_encounters_change').text('(' + max_concurrent_encounters_change + '% daily change)');
-					// }
+					$('#annotated_episodes').text(current_data['episodes_annotated']);
+					$('#unique_semantic_locations').text(current_data['tags']);
+					$('#percent_annotated').text(Math.round( (current_data['episodes_annotated']/current_data['episodes_selected'])*1000)/10);
 
 				})
 			});
@@ -147,24 +130,30 @@
 			<section id="two" class="wrapper style1 special">
 				<a id="Data"></a>
 				<div class="inner">
-					<h4>Current Study Statistics</h4>
+					<h2>Current MOODS Statistics</h2>
 					<!-- <h4>Last daily update on <span id="last_update_date"> Sat Aug 08 2020 00:00:00 GMT-0500 (Central Daylight Time)</span></h4> -->
 						<div class="stats">
 							<article>
-								<h3><span id="app_users"></span> Users</h3>
-								<h4><div id="app_users_change">(-6.1% daily change)</div></h4>
+								<h3><span id="app_users"></span>Users</h3>
 
 							</article>
 							<article>
-								<h3><span id="social_encounters_per_user">0.02</span> Proximity Encounters Per User</h3>
-								<h4><div id="social_encounters_per_user_change">(6.5% daily change)</div></h4>
+								<h3><span id="annotated_episodes"></span>Annotated Episodes</h3>
 
 							</article>
 							<article>
+								<h3><span id="percent_annotated"></span>Percent Annotated</h3>
+
+							</article>
+							<article>
+								<h3><span id="unique_semantic_locations"></span>Unique Semantic Locations</h3>
+
+							</article>
+							<!-- <article>
 								<h3><span id="max_concurrent_encounters">1</span> User Encounters at the Largest Crowding Event</h3>
-								<h4><div id="max_concurrent_encounters_change">(0% daily change)</div></h4>
+								<!-- <h4><div id="m d ax_concurrent_encounters_change">(0% daily change)</div></h4> -->
 
-							</article>
+							<!-- </article> -->
 						</div>
 				</div>
 			</section>
