@@ -48,10 +48,9 @@
 				$.getJSON("https://odin.md2k.org/app_api/stats", function(data) {
 					var current_data=data;
 
-					$('#app_users').text(current_data['users']);
-					$('#annotated_episodes').text(current_data['episodes_annotated']);
-					$('#unique_semantic_locations').text(current_data['tags']);
-					$('#percent_annotated').text(Math.round( (current_data['episodes_annotated']/current_data['episodes_selected'])*1000)/10);
+					$('#participants').text(current_data['participants']);
+					$('#participant_days').text(current_data['participant_days']);
+					$('#recorded_stressors').text(current_data['recorded_stressors']);
 
 				})
 			});
@@ -134,19 +133,15 @@
 					<!-- <h4>Last daily update on <span id="last_update_date"> Sat Aug 08 2020 00:00:00 GMT-0500 (Central Daylight Time)</span></h4> -->
 						<div class="stats">
 							<article>
-								<h3><span id="app_users"></span>Users</h3>
+								<h3><span id="participants"></span>Participants</h3>
 
 							</article>
 							<article>
-								<h3><span id="annotated_episodes"></span>Annotated Episodes</h3>
+								<h3><span id="participant_days"></span>Participant-Days</h3>
 
 							</article>
 							<article>
-								<h3><span id="percent_annotated"></span>Percent Annotated</h3>
-
-							</article>
-							<article>
-								<h3><span id="unique_semantic_locations"></span>Unique Semantic Locations</h3>
+								<h3><span id="recorded_stressors"></span>Recorded Stressors</h3>
 
 							</article>
 							<!-- <article>
