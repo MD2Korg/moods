@@ -6,6 +6,7 @@
 -->
 <html>
 	<head>
+
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7NGD19FCGC"></script>
 		<script>
@@ -18,21 +19,53 @@
 
 		<title>MOODS by MD2K</title>
 		<meta charset="utf-8" />
+
+		<!-- <meta property="og:image" content="https://moods.md2k.org/images/downloadMContainSmall.jpg"> -->
+		<meta property="og:title" content="MOODS">
+		<meta property="og:url" content="https://moods.md2k.org/">
+		<meta property="og:description" content="Mobile Open Observation of Daily Stressors">
+		<meta property="og:video:url" content="http://moods.md2k.org/images/moodsDemo1.mp4">
+		<meta property="og:video:secure_url" content="https://moods.md2k.org/images/moodsDemo1.mp4">
+		<meta property="og:locale" content="en_US">
+		<meta property="og:type" content="website">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:url" content="https://moods.md2k.org/">
+		<meta name="twitter:title" content="MOODS">
+		<meta name="twitter:description" content="Mobile Open Observation of Daily Stressors">
+		<meta property="twitter:image" content="https://moods.md2k.org/images/moodsLogo300px.png">
+		<meta name="google-play-app" content="app-id=org.md2k.moods">
+		<meta name="author" content="MD2K Center of Excellence at The University of Memphis">
+
+
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<script src="assets/js/jquery.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$.getJSON("https://odin.md2k.org/app_api/stats", function(data) {
+					var current_data=data;
+
+					$('#participants').text(current_data['participants']);
+					$('#participant_days').text(current_data['participant_days']);
+					$('#recorded_stressors').text(current_data['recorded_stressors']);
+
+				})
+			});
+		</script>
 	</head>
 	<body id="top">
 
 		<!-- Header -->
-			<header id="header">
+			<header id="header" class="alt">
 
 				<!-- Logo -->
 					<div class="logo">
 						<a href="index.html">MOODS</a><span> The <a href="https://www.md2k.org" target="_blank">MD2K Center of Excellence</a> at <a href="https://www.memphis.edu" target="_blank">The University of Memphis</a> </span>
 					</div>
+
 
 				<!-- Nav -->
 					<nav id="nav">
@@ -51,7 +84,6 @@
 
 			</header>
 
-
 			<section id="publications" class="wrapper style1 special">
 				<div class="inner" >
 					
@@ -68,10 +100,9 @@
 					<!-- Future publications can be added here -->
 				</div>
 			</section>
-		<!-- Main -->
-	
 
 		
+
 
 			<footer id="footer">
 						<p style="text-align: center; font-size: small; margin-left: 10%; margin-right: 10%;">&copy; 2021 MD2K Center of Excellence. All rights reserved. <br />
@@ -81,16 +112,17 @@
 					<a href="mailto:moods@md2k.org" style="color: #ffffff;">moods@md2k.org</a></p>
 				</footer>
 
-			<!-- Scripts -->
-				<script src="assets/js/jquery.min.js"></script>
-				<script src="assets/js/jquery.dropotron.min.js"></script>
-				<script src="assets/js/jquery.scrollex.min.js"></script>
-				<script src="assets/js/jquery.scrolly.min.js"></script>
-				<script src="assets/js/jquery.selectorr.min.js"></script>
-				<script src="assets/js/skel.min.js"></script>
-				<script src="assets/js/util.js"></script>
-				<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-				<script src="assets/js/main.js"></script>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.selectorr.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
 
-		</body>
-	</html>
+	</body>
+
+</html>
